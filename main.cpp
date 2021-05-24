@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include <cstdlib>
 #include "Cellular_automata.h"
 
@@ -30,5 +29,6 @@ int main(int argc, char* argv[]) {
 }
 
 /* TODO:
- * make it into a .pbm image instead of cmd line output
+ * add toggle for random input vs. single-bit input
+ * make more stuff customizable from the command line
  */

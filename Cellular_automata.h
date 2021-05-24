@@ -18,9 +18,9 @@ public:
     void run(int rule);
 
 private:
-    static const int NUM_GENERATIONS = 100;
-    static const int WIDTH           = 117;
-    const string query_arr[8] = {"***", "** ", "* *", "*  ", " **", " * ", "  *", "   "};
+    static const int NUM_GENERATIONS = 1024;
+    static const int WIDTH           = 2047;
+    const string query_arr[8] = {"111", "110", "101", "100", "011", "010", "001", "000"};
 
     void extrapolate_rule(int rule);
     void advance_generation(int direction);
