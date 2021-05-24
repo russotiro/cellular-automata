@@ -2,6 +2,8 @@
 // Created by RussellS on 5/23/21.
 //
 
+// Some fun rules: 30, 45, 90, 110, 225
+
 #ifndef CELLULAR_AUTOMATA_CELLULAR_AUTOMATA_H
 #define CELLULAR_AUTOMATA_CELLULAR_AUTOMATA_H
 
@@ -21,10 +23,12 @@ private:
     const string query_arr[8] = {"***", "** ", "* *", "*  ", " **", " * ", "  *", "   "};
 
     void extrapolate_rule(int rule);
-
     void advance_generation(int direction);
-    char data[2][WIDTH]{};
+
+    char data[2][WIDTH];
     int rule_binary[8] = {0, 0, 0, 0, 0, 0, 0, 0};
+    int rule_int;
+    bool wrap_single_neighbor_cells = true;
 };
 
 

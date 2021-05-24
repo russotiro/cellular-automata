@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <cstdlib>
-#include <string>
 #include "Cellular_automata.h"
 
 using namespace std;
@@ -32,6 +31,4 @@ int main(int argc, char* argv[]) {
 
 /* TODO:
  * make it into a .pbm image instead of cmd line output
- * simplify advance_generation
- * fix handling of single-neighbor cells by using wrapping
  */
