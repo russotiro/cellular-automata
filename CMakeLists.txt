@@ -3,4 +3,4 @@ project(cellular_automata)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(cellular_automata main.cpp)
+add_executable(cellular_automata main.cpp Cellular_automata.cpp Cellular_automata.h)

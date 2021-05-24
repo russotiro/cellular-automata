@@ -1,51 +1,37 @@
 #include <iostream>
-
-const int NUM_GENERATIONS = 256;
-const int WIDTH           = 117;
+#include <fstream>
+#include <cstdlib>
+#include <string>
+#include "Cellular_automata.h"
 
 using namespace std;
 
-void advance_generation(char data[2][WIDTH], int direction);
+int main(int argc, char* argv[]) {
 
-int main() {
-
-    char data[2][WIDTH];
-
-    // Initialize data array
-    for (int i = 0; i < WIDTH; i++) {
-        data[0][i] = ' ';
-        data[1][i] = ' ';
+    if (argc < 2) {
+        cerr << "Error: Please specify the rule number as a command-line argument." << endl;
+        exit(EXIT_FAILURE);
+    } else if (argc > 2) {
+        cerr << "Error: Too many command-lind arguments." << endl;
+        exit(EXIT_FAILURE);
     }
-    data[0][WIDTH / 2] = '*';
 
-    // Main computations and printing
-    for (int j = 0; j < NUM_GENERATIONS; j++) {
-        for (int i = 0; i < WIDTH; i++) {
-            advance_generation(data, j % 2);
-            cout << data[j % 2][i];
-        }
-        cout << endl;
+    int rule = strtol(argv[1], nullptr, 10);
+
+    if (rule < 0 or rule > 255) {
+        cerr << "Error: Rule number must be in range [0, 255]." << endl;
+        exit(EXIT_FAILURE);
     }
+
+    Cellular_automata ca1;
+
+    ca1.run(rule);
+
+    return 0;
 }
 
-void advance_generation(char data[2][WIDTH], int direction) {
-    for (int i = 0; i < WIDTH - 2; i++) {
-        string query = {data[direction][i], data[direction][i + 1], data[direction][i + 2]};
-        if (query == "***")
-            data[1 - direction][i + 1] = ' ';
-        else if (query == "** ")
-            data[1 - direction][i + 1] = ' ';
-        else if (query == "* *")
-            data[1 - direction][i + 1] = ' ';
-        else if (query == "*  ")
-            data[1 - direction][i + 1] = '*';
-        else if (query == " **")
-            data[1 - direction][i + 1] = '*';
-        else if (query == " * ")
-            data[1 - direction][i + 1] = '*';
-        else if (query == "  *")
-            data[1 - direction][i + 1] = '*';
-        else if (query == "   ")
-            data[1 - direction][i + 1] = ' ';
-    }
-}
+/* TODO:
+ * make it into a .pbm image instead of cmd line output
+ * simplify advance_generation
+ * fix handling of single-neighbor cells by using wrapping
+ */
