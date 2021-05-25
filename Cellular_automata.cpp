@@ -48,7 +48,7 @@ void Cellular_automata::extrapolate_rule(int rule) {
 
 void Cellular_automata::advance_generation(int direction) {
     string query;
-    int offset = wrap_single_neighbor_cells ? 0 : 1;
+    int offset = single_neighbor_cells == "wrap" ? 0 : 1;
     for (int i = offset; i < WIDTH - offset; i++) {
         // Extrapolate 3-bit query from current row
         query = {data[direction][(i - 1 + WIDTH) % WIDTH], data[direction][i], data[direction][(i + 1) % WIDTH]};
@@ -58,7 +58,11 @@ void Cellular_automata::advance_generation(int direction) {
                 data[1 - direction][i] = rule_binary[j] == 1 ? '1' : '0';
             }
         }
-        if (!wrap_single_neighbor_cells)
-            data[1 - direction][0] = data[1 - direction][WIDTH - 1] = rule_int % 2 == 0 ? '0' : '1';
+        // Assign single-neighbor cells for "fill" and "clear" modes
+        if (single_neighbor_cells == "fill") {
+            data[1 - direction][0] = data[1 - direction][WIDTH - 1] = '1';
+        } else if (single_neighbor_cells == "clear") {
+            data[1 - direction][0] = data[1 - direction][WIDTH - 1] = '0';
+        }
     }
 }

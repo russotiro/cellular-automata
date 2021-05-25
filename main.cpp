@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cstdlib>
-#include <time.h>
+#include <ctime>
 #include "Cellular_automata.h"
 
 using namespace std;
