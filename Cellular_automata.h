@@ -29,6 +29,7 @@ private:
     int rule_binary[8] = {0, 0, 0, 0, 0, 0, 0, 0};
     int rule_int;
     bool wrap_single_neighbor_cells = true;
+    bool random_input = true;
 };
 
 

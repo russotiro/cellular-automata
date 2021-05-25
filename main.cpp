@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <time.h>
 #include "Cellular_automata.h"
 
 using namespace std;
@@ -21,6 +22,8 @@ int main(int argc, char* argv[]) {
         exit(EXIT_FAILURE);
     }
 
+    srand(time(nullptr));
+
     Cellular_automata ca1;
 
     ca1.run(rule);
@@ -29,6 +32,6 @@ int main(int argc, char* argv[]) {
 }
 
 /* TODO:
- * add toggle for random input vs. single-bit input
  * make more stuff customizable from the command line
+ * maybe add GUI?
  */

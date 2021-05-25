@@ -6,15 +6,17 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstdlib>
 
 using namespace std;
 
 Cellular_automata::Cellular_automata() {
     for (int i = 0; i < WIDTH; i++) {
-        data[0][i] = '0';
+        data[0][i] = random_input ? (rand() % 2 == 1 ? '1' : '0') : '0';
         data[1][i] = '0';
     }
-    data[0][WIDTH / 2] = '1';
+    if (!random_input)
+        data[0][WIDTH / 2] = '1';
 }
 
 void Cellular_automata::run(int rule) {
