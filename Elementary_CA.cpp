@@ -2,15 +2,16 @@
 // Created by RussellS on 5/23/21.
 //
 
-#include "Cellular_automata.h"
+#include "Elementary_CA.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <cstdlib>
+#include <sstream>
 
 using namespace std;
 
-Cellular_automata::Cellular_automata() {
+Elementary_CA::Elementary_CA() {
     for (int i = 0; i < WIDTH; i++) {
         data[0][i] = random_input ? (rand() % 2 == 1 ? '1' : '0') : '0';
         data[1][i] = '0';
@@ -19,10 +20,11 @@ Cellular_automata::Cellular_automata() {
         data[0][WIDTH / 2] = '1';
 }
 
-void Cellular_automata::run(int rule) {
+void Elementary_CA::run(int rule) {
     extrapolate_rule(rule);
 
-    ofstream ca_img("ca.pbm");
+    // .pbm file setup
+    ofstream ca_img("elem_ca_r#" + to_string(rule) + ".pbm");
     ca_img << "P1" << endl;
     ca_img << WIDTH << " " << NUM_GENERATIONS << endl;
 
@@ -37,8 +39,7 @@ void Cellular_automata::run(int rule) {
     ca_img.close();
 }
 
-void Cellular_automata::extrapolate_rule(int rule) {
-    rule_int = rule;
+void Elementary_CA::extrapolate_rule(int rule) {
     // Big-endian
     for (int i = 7; rule > 0; i--) {
         rule_binary[i] = rule % 2;
@@ -46,7 +47,7 @@ void Cellular_automata::extrapolate_rule(int rule) {
     }
 }
 
-void Cellular_automata::advance_generation(int direction) {
+void Elementary_CA::advance_generation(int direction) {
     string query;
     int offset = single_neighbor_cells == "wrap" ? 0 : 1;
     for (int i = offset; i < WIDTH - offset; i++) {
@@ -65,4 +66,10 @@ void Cellular_automata::advance_generation(int direction) {
             data[1 - direction][0] = data[1 - direction][WIDTH - 1] = '0';
         }
     }
+}
+
+string Elementary_CA::to_string(int value) {
+    ostringstream my_ss;
+    my_ss << value;
+    return my_ss.str();
 }

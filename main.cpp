@@ -1,7 +1,8 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "Cellular_automata.h"
+#include "Elementary_CA.h"
+#include "Color_CA.h"
 
 using namespace std;
 
@@ -24,9 +25,11 @@ int main(int argc, char* argv[]) {
 
     srand(time(nullptr));
 
-    Cellular_automata ca1;
-
+    Elementary_CA ca1;
     ca1.run(rule);
+
+    Color_CA ca2;
+    ca2.run();
 
     return 0;
 }

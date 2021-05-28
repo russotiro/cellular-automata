@@ -4,22 +4,22 @@
 
 // Some fun rules: 30, 45, 90, 110, 225
 
-#ifndef CELLULAR_AUTOMATA_CELLULAR_AUTOMATA_H
-#define CELLULAR_AUTOMATA_CELLULAR_AUTOMATA_H
+#ifndef ELEMENTARY_CA_H
+#define ELEMENTARY_CA_H
 
 #include <string>
 
 using namespace std;
 
-class Cellular_automata {
+class Elementary_CA {
 public:
-    Cellular_automata();
+    Elementary_CA();
 
     void run(int rule);
 
 private:
     static const int NUM_GENERATIONS = 1024;
-    static const int WIDTH           = 455;
+    static const int WIDTH           = 511;
     const string query_arr[8] = {"111", "110", "101", "100", "011", "010", "001", "000"};
 
     void extrapolate_rule(int rule);
@@ -27,10 +27,11 @@ private:
 
     char data[2][WIDTH];
     int rule_binary[8] = {0, 0, 0, 0, 0, 0, 0, 0};
-    int rule_int;
     string single_neighbor_cells = "wrap"; // "wrap", "fill", or "clear"
-    bool random_input = false;
+    bool random_input = true;
+
+    static string to_string(int value);
 };
 
 
-#endif //CELLULAR_AUTOMATA_CELLULAR_AUTOMATA_H
+#endif //ELEMENTARY_CA_H
